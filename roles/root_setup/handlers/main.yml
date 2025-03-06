@@ -1,0 +1,7 @@
+---
+- name: Reboot if needed
+  ansible.builtin.reboot:
+    msg: "Reboot initiated by root_setup role due to system update"
+    connect_timeout: 5
+    reboot_timeout: 600
+  when: system_update.changed

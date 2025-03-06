@@ -1,0 +1,21 @@
+---
+- name: Restart SSH
+  ansible.builtin.service:
+    name: ssh
+    state: restarted
+
+- name: Restart fail2ban
+  ansible.builtin.service:
+    name: fail2ban
+    state: restarted
+
+- name: Restart Docker
+  ansible.builtin.service:
+    name: docker
+    state: restarted
+
+- name: Restart Docker for logging changes
+  ansible.builtin.service:
+    name: docker
+    state: restarted
+  listen: "restart docker for logging"

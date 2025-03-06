@@ -1,0 +1,30 @@
+services:
+  traefik:
+    image: {{ traefik_image }}
+    command:
+{% for cmd in traefik_command %}
+      - "{{ cmd }}"
+{% endfor %}
+    ports:
+{% for port in traefik_ports %}
+      - "{{ port }}"
+{% endfor %}
+    volumes:
+{% for vol in traefik_volumes %}
+      - "{{ vol }}"
+{% endfor %}
+    networks:
+      - "{{ traefik_public_network }}"
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dashboard.rule=Host(`traefik.{{ traefik_domain }}`)"
+      - "traefik.http.routers.dashboard.service=api@internal"
+      - "traefik.http.routers.dashboard.entrypoints=websecure"
+      - "traefik.http.routers.dashboard.tls.certresolver=myresolver"
+      - "traefik.http.routers.dashboard.middlewares=auth"
+      - "traefik.http.middlewares.auth.basicauth.users={{ traefik_dashboard_auth }}"
+
+networks:
+  {{ traefik_public_network }}:
+    external: true

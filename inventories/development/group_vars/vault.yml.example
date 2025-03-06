@@ -1,0 +1,5 @@
+---
+# Contoh file vault untuk menyimpan password
+# Gunakan ansible-vault create inventories/development/group_vars/vault.yml untuk membuat file terenkripsi
+vault_root_setup_pass: "password_admin_yang_aman"
+vault_traefik_dashboard_auth: "admin:hashed_password"

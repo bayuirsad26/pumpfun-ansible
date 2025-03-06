@@ -1,0 +1,16 @@
+---
+- name: Include SSH hardening tasks
+  ansible.builtin.include_tasks: ssh.yml
+  tags: [user_setup, ssh]
+
+- name: Include firewall configuration tasks
+  ansible.builtin.include_tasks: firewall.yml
+  tags: [user_setup, firewall]
+
+- name: Include Docker installation tasks
+  ansible.builtin.include_tasks: docker.yml
+  tags: [user_setup, docker]
+
+- name: Include swap configuration tasks
+  ansible.builtin.include_tasks: swap.yml
+  tags: [user_setup, swap]
